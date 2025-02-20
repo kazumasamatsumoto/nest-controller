@@ -1,99 +1,250 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+## 目的
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+- NestJSプロジェクトの作成方法を学ぶ
+- コントローラーの基本概念を理解する
+- 基本的なCRUDエンドポイントの構造を理解する
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 環境構築
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
+### 1. NestJSのCLIをインストール
 
 ```bash
-$ npm install
+npm install -g @nestjs/cli
+
 ```
 
-## Compile and run the project
+### 2. プロジェクトの作成
 
 ```bash
-# development
-$ npm run start
+nest new blog-app
+cd blog-app
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Run tests
+↑ プロジェクト名を聞かれたら「blog-app」と入力してEnterを押してください。
+パッケージマネージャーを聞かれたら「npm」を選択してください。
+
+### 3. 開発サーバーの起動確認
 
 ```bash
-# unit tests
-$ npm run test
+npm run start:dev
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Deployment
+ブラウザで [http://localhost:3000](http://localhost:3000/) にアクセスして「Hello World!」が表示されることを確認します。
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## 実装手順
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 1. postsコントローラーの生成
 
 ```bash
-$ npm install -g mau
-$ mau deploy
+nest generate controller posts
+
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 2. DTOの作成
 
-## Resources
+まず、`src/posts`フォルダに`dto`フォルダを作成し、その中に`create-post.dto.ts`を作成します：
 
-Check out a few resources that may come in handy when working with NestJS:
+```tsx
+// src/posts/dto/create-post.dto.ts
+export class CreatePostDto {
+  title: string;
+  content: string;
+  authorId: number;
+}
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### 3. コントローラーの実装
 
-## Support
+`src/posts/posts.controller.ts`を以下のように実装します：
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```tsx
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Put,
+  Delete,
+} from '@nestjs/common';
+import { CreatePostDto } from './dto/create-post.dto';
+import { Post as PostInterface } from './interfaces/post.interface';
 
-## Stay in touch
+@Controller('posts')
+export class PostsController {
+  private posts: PostInterface[] = [];
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+  @Get()
+  findAll(): PostInterface[] {
+    return this.posts;
+  }
 
-## License
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.posts.find((post) => post.id === Number(id));
+  }
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+  @Post()
+  create(@Body() createPostDto: CreatePostDto) {
+    const newPost = {
+      id: this.posts.length + 1,
+      ...createPostDto,
+      createdAt: new Date(),
+    };
+    this.posts.push(newPost);
+    return newPost;
+  }
+
+  @Put(':id')
+  update(@Param('id') id: string, @Body() updatePostDto: CreatePostDto) {
+    const index = this.posts.findIndex((post) => post.id === Number(id));
+    if (index > -1) {
+      this.posts[index] = {
+        ...this.posts[index],
+        ...updatePostDto,
+        updatedAt: new Date(),
+      };
+      return this.posts[index];
+    }
+    return { error: 'Post not found' };
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    const index = this.posts.findIndex((post) => post.id === Number(id));
+    if (index > -1) {
+      const deletedPost = this.posts[index];
+      this.posts.splice(index, 1);
+      return deletedPost;
+    }
+    return { error: 'Post not found' };
+  }
+}
+```
+
+## 動作確認手順
+
+### 1. サーバーの起動
+
+```bash
+npm run start:dev
+
+```
+
+### 2. APIのテスト
+
+Postmanまたはcurlを使って以下のエンドポイントをテストします：
+
+### 投稿の作成
+
+```bash
+curl -X POST <http://localhost:3000/posts> \\
+-H "Content-Type: application/json" \\
+-d '{"title": "初めての投稿", "content": "Hello NestJS!", "authorId": 1}'
+
+```
+
+期待される応答:
+
+```json
+{
+  "id": 1,
+  "title": "初めての投稿",
+  "content": "Hello NestJS!",
+  "authorId": 1,
+  "createdAt": "2025-02-20T..."
+}
+```
+
+PowerShell
+
+```html
+PS C:\Users\kazum\tutorial\nest\controller> Invoke-RestMethod -Method Post -Uri
+http://localhost:3000/posts -ContentType "application/json" -Body '{"title":
+"初めての投稿", "content": "Hello NestJS!", "authorId": 1}' id : 1 title :
+初めての投稿 content : Hello NestJS! authorId : 1 createdAt : 2025/02/20 6:42:36
+```
+
+```html
+PS C:\Users\kazum\tutorial\nest\controller> Invoke-RestMethod -Method Post -Uri
+http://localhost:3000/posts -ContentType "application/json" -Body '{"title":
+"初めての投稿", "content": "Hello NestJS!", "authorId": 2}' id : 2 title :
+初めての投稿 content : Hello NestJS! authorId : 2 createdAt : 2025/02/20 6:44:21
+```
+
+### 全投稿の取得
+
+```bash
+curl <http://localhost:3000/posts>
+
+```
+
+powershell
+
+```html
+PS C:\Users\kazum\tutorial\nest\controller> Invoke-RestMethod -Method Get -Uri
+http://localhost:3000/posts id : 1 title : 初めての投稿 content : Hello NestJS!
+authorId : 1 createdAt : 2025/02/20 6:42:36 id : 2 title : 初めての投稿 content
+: Hello NestJS! authorId : 2 createdAt : 2025/02/20 6:44:21
+```
+
+## チェックポイント
+
+- [ ] サーバーが正常に起動できる
+- [ ] POSTリクエストで新しい投稿が作成できる
+- [ ] GETリクエストで投稿一覧が取得できる
+- [ ] GETリクエストで個別の投稿が取得できる
+- [ ] PUTリクエストで投稿が更新できる
+- [ ] DELETEリクエストで投稿が削除できる
+
+## よくある問題と解決方法
+
+1. `nest command not found`
+   - 解決: `npm install -g @nestjs/cli`を再実行
+2. ポート3000が既に使用中
+
+   - 解決: `src/main.ts`で別のポートを指定
+
+   ```tsx
+   await app.listen(3001);
+   ```
+
+3. POSTリクエストが403エラー
+
+   - 解決: `main.ts`にCORSを追加
+
+   ```tsx
+   app.enableCors();
+   ```
+
+## 補足説明
+
+### デコレーターの役割
+
+- `@Controller('posts')`: URLのベースパスを`/posts`に設定
+- `@Get()`: GETリクエストを処理
+- `@Post()`: POSTリクエストを処理
+- `@Body()`: リクエストボディを取得
+- `@Param()`: URLパラメータを取得
+
+### ファイル構造の説明
+
+```
+src/
+├── posts/
+│   ├── dto/
+│   │   └── create-post.dto.ts
+│   └── posts.controller.ts
+└── main.ts
+
+```
+
+次の課題では、このコントローラーにサービス層を追加し、ビジネスロジックを分離していきます。
+
+理解度を確認したい場合は、以下の質問に答えてみてください：
+
+1. コントローラーの役割は何ですか？
+2. DTOを使用する理由は何ですか？
+3. 各エンドポイントがどのようなHTTPメソッドを処理するか説明できますか？
