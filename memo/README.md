@@ -1,99 +1,393 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+## Step 1: フォルダとファイルの作成
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ npm install
+```powershell
+# プロジェクトフォルダを作成
+nest new memo
+cd memo
 ```
 
-## Compile and run the project
+### 1-1. メモモジュールの作成
 
 ```bash
-# development
-$ npm run start
+nest generate module memos
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Run tests
+### 1-2. メモコントローラーの作成
 
 ```bash
-# unit tests
-$ npm run test
+nest generate controller memos
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 1-3. メモサービスの作成
 
 ```bash
-$ npm install -g mau
-$ mau deploy
+nest generate service memos
+
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 1-4. 必要なフォルダの作成
 
-## Resources
+```bash
+# dtoフォルダを作成
+mkdir src/memos/dto
 
-Check out a few resources that may come in handy when working with NestJS:
+# interfacesフォルダを作成
+mkdir src/memos/interfaces
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```
 
-## Support
+### 1-5. 必要なファイルの作成
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+# create-memo.dto.tsファイルを作成
+touch src/memos/dto/create-memo.dto.ts
 
-## Stay in touch
+# update-memo.dto.tsファイルを作成
+touch src/memos/dto/update-memo.dto.ts
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# memo.interface.tsファイルを作成
+touch src/memos/interfaces/memo.interface.ts
 
-## License
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## Step 2: 各ファイルの実装
+
+### 2-1. create-memo.dto.tsの実装
+
+1. Visual Studio Codeで`src/memos/dto/create-memo.dto.ts`を開きます
+2. 以下のコードをコピーして貼り付けます：
+
+```tsx
+export class CreateMemoDto {
+  title: string;
+  content: string;
+}
+```
+
+### 2-2. update-memo.dto.tsの実装
+
+1. `src/memos/dto/update-memo.dto.ts`を開きます
+2. 以下のコードをコピーして貼り付けます：
+
+```tsx
+export class UpdateMemoDto {
+  title?: string;
+  content?: string;
+}
+```
+
+### 2-3. memo.interface.tsの実装
+
+1. `src/memos/interfaces/memo.interface.ts`を開きます
+2. 以下のコードをコピーして貼り付けます：
+
+```tsx
+export interface Memo {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
+### 2-4. memos.service.tsの実装
+
+1. `src/memos/memos.service.ts`を開きます
+2. 既存のコードを全て削除します
+3. 以下のコードをコピーして貼り付けます：
+
+```tsx
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Memo } from './interfaces/memo.interface';
+import { CreateMemoDto } from './dto/create-memo.dto';
+import { UpdateMemoDto } from './dto/update-memo.dto';
+
+@Injectable()
+export class MemosService {
+  private memos: Memo[] = [];
+
+  findAll(): Memo[] {
+    return this.memos;
+  }
+
+  findOne(id: number): Memo {
+    const memo = this.memos.find((memo) => memo.id === id);
+    if (!memo) {
+      throw new NotFoundException(`メモID: ${id} が見つかりません`);
+    }
+    return memo;
+  }
+
+  create(createMemoDto: CreateMemoDto): Memo {
+    const newMemo: Memo = {
+      id: this.memos.length + 1,
+      ...createMemoDto,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.memos.push(newMemo);
+    return newMemo;
+  }
+
+  update(id: number, updateMemoDto: UpdateMemoDto): Memo {
+    const memoIndex = this.memos.findIndex((memo) => memo.id === id);
+    if (memoIndex === -1) {
+      throw new NotFoundException(`メモID: ${id} が見つかりません`);
+    }
+
+    this.memos[memoIndex] = {
+      ...this.memos[memoIndex],
+      ...updateMemoDto,
+      updatedAt: new Date(),
+    };
+
+    return this.memos[memoIndex];
+  }
+
+  remove(id: number): void {
+    const memoIndex = this.memos.findIndex((memo) => memo.id === id);
+    if (memoIndex === -1) {
+      throw new NotFoundException(`メモID: ${id} が見つかりません`);
+    }
+    this.memos.splice(memoIndex, 1);
+  }
+}
+```
+
+### 2-5. memos.controller.tsの実装
+
+1. `src/memos/memos.controller.ts`を開きます
+2. 既存のコードを全て削除します
+3. 以下のコードをコピーして貼り付けます：
+
+```tsx
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
+  ParseIntPipe,
+} from '@nestjs/common';
+import { MemosService } from './memos.service';
+import { CreateMemoDto } from './dto/create-memo.dto';
+import { UpdateMemoDto } from './dto/update-memo.dto';
+
+@Controller('memos')
+export class MemosController {
+  constructor(private readonly memosService: MemosService) {}
+
+  @Get()
+  findAll() {
+    return this.memosService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.memosService.findOne(id);
+  }
+
+  @Post()
+  create(@Body() createMemoDto: CreateMemoDto) {
+    return this.memosService.create(createMemoDto);
+  }
+
+  @Put(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateMemoDto: UpdateMemoDto,
+  ) {
+    return this.memosService.update(id, updateMemoDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.memosService.remove(id);
+  }
+}
+```
+
+## Step 3: 動作確認
+
+### 3-1. サーバーの起動
+
+1. ターミナルを開きます
+2. 以下のコマンドを実行します：
+
+```bash
+npm run start:dev
+
+```
+
+### 3-2. 新しいメモの作成
+
+1. 新しいターミナルを開きます
+2. 以下のコマンドをコピーして実行します：
+
+```bash
+curl -X POST <http://localhost:3000/memos> \\
+-H "Content-Type: application/json" \\
+-d '{"title": "買い物リスト", "content": "1. 牛乳\\n2. パン\\n3. 卵"}'
+
+```
+
+### 3-3. メモの取得
+
+以下のコマンドを実行してメモを取得します：
+
+```bash
+curl <http://localhost:3000/memos/1>
+
+```
+
+### 3-4. メモの更新
+
+以下のコマンドを実行してメモを更新します：
+
+```bash
+curl -X PUT <http://localhost:3000/memos/1> \\
+-H "Content-Type: application/json" \\
+-d '{"title": "更新された買い物リスト", "content": "1. 牛乳\\n2. パン\\n3. 卵\\n4. バター"}'
+
+```
+
+### 3-5. メモの削除
+
+以下のコマンドを実行してメモを削除します：
+
+```bash
+curl -X DELETE <http://localhost:3000/memos/1>
+
+```
+
+## トラブルシューティング
+
+### エラー1: モジュールが見つからない
+
+対処方法:
+
+1. `src/app.module.ts`を開く
+2. `imports`配列に`MemosModule`が含まれているか確認
+3. なければ以下のように追加：
+
+```tsx
+import { MemosModule } from './memos/memos.module';
+
+@Module({
+  imports: [MemosModule],
+})
+
+```
+
+### エラー2: サーバーが起動しない
+
+対処方法:
+
+1. すべてのファイルが保存されているか確認
+2. ターミナルで`npm run start:dev`を再実行
+3. エラーメッセージを確認して、該当するファイルの修正を行う
+
+各ステップで問題が発生した場合は、すぐに質問してください！
+
+# 課題2の理解度チェック
+
+## 実装の確認
+
+### 1. プロジェクト構造の確認
+
+- [ ] `src/memos`フォルダが存在する
+- [ ] `src/memos/dto`フォルダが存在する
+- [ ] `src/memos/interfaces`フォルダが存在する
+- [ ] 必要なすべてのファイルが作成されている
+
+### 2. サーバー起動の確認
+
+- [ ] `npm run start:dev`でサーバーが起動する
+- [ ] エラーメッセージが表示されていない
+
+### 3. APIエンドポイントの動作確認
+
+### メモの作成（POST）
+
+```bash
+curl -X POST <http://localhost:3000/memos> \\
+-H "Content-Type: application/json" \\
+-d '{"title": "テストメモ", "content": "テスト内容"}'
+
+```
+
+- [ ] 200系のレスポンスが返ってくる
+- [ ] 作成したメモのIDが返ってくる
+- [ ] レスポンスに`createdAt`と`updatedAt`が含まれている
+
+### メモ一覧の取得（GET）
+
+```bash
+curl <http://localhost:3000/memos>
+
+```
+
+- [ ] 空の配列または作成したメモの一覧が返ってくる
+- [ ] エラーが発生しない
+
+### 個別メモの取得（GET）
+
+```bash
+curl <http://localhost:3000/memos/1>
+
+```
+
+- [ ] 指定したIDのメモが返ってくる
+- [ ] 存在しないIDの場合はエラーメッセージが返ってくる
+
+### メモの更新（PUT）
+
+```bash
+curl -X PUT <http://localhost:3000/memos/1> \\
+-H "Content-Type: application/json" \\
+-d '{"title": "更新されたメモ", "content": "更新された内容"}'
+
+```
+
+- [ ] 更新されたメモの内容が返ってくる
+- [ ] `updatedAt`の時刻が更新されている
+
+### メモの削除（DELETE）
+
+```bash
+curl -X DELETE <http://localhost:3000/memos/1>
+
+```
+
+- [ ] メモが正常に削除される
+- [ ] 削除後にGETで確認すると該当メモが存在しない
+
+### 4. エラーハンドリングの確認
+
+- [ ] 存在しないIDへのGETリクエストで404エラーが返る
+- [ ] 存在しないIDへのPUTリクエストで404エラーが返る
+- [ ] 存在しないIDへのDELETEリクエストで404エラーが返る
+
+### 5. コード理解の確認
+
+- [ ] `@Injectable()`デコレータの役割が理解できている
+- [ ] `@Controller('memos')`の意味が理解できている
+- [ ] DTOとインターフェースの違いが理解できている
+- [ ] サービスとコントローラーの責務の違いが理解できている
+
+## 完了条件
+
+上記のすべてのチェック項目にチェックが入ったら、課題2は完了です！
+
+分からない項目があれば、以下のどの部分が理解できていないか教えてください：
+
+1. ファイル構造
+2. サーバー起動
+3. APIリクエスト
+4. エラーハンドリング
+5. コードの意味
