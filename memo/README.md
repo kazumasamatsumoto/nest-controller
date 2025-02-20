@@ -52,6 +52,16 @@ touch src/memos/interfaces/memo.interface.ts
 
 ```
 
+powershell
+
+```powershell
+PS C:\Users\kazum\tutorial\nest\controller\memo> New-Item -Path "src/memos/dto/create-memo.dto.ts" -ItemType "file" -Force
+
+PS C:\Users\kazum\tutorial\nest\controller\memo> New-Item -Path "src/memos/dto/update-memo.dto.ts" -ItemType "file" -Force
+
+PS C:\Users\kazum\tutorial\nest\controller\memo> New-Item -Path "src/memos/interfaces/memo.interface.ts" -ItemType "file" -Force
+```
+
 ## Step 2: 各ファイルの実装
 
 ### 2-1. create-memo.dto.tsの実装
@@ -236,6 +246,32 @@ curl -X POST <http://localhost:3000/memos> \\
 
 ```
 
+```powershell
+PS C:\Users\kazum\tutorial\nest\controller> Invoke-WebRequest -Uri "http://localhost:3000/memos" `
+>> -Method POST `
+>> -Headers @{"Content-Type"="application/json"} `
+>> -Body '{"title": "買い物リスト", "content": "1. 牛乳\n2. パン\n3. 卵"}'
+
+StatusCode        : 201
+StatusDescription : Created
+Content           : {"id":2,"title":"買い物リスト","content":"1. 牛乳\n2. パン\n3. 卵","createdAt":"2025-02-20T11:01:43.315Z","updatedAt":"2025-02-20T11:01:43.315Z"}
+RawContent        : HTTP/1.1 201 Created
+                    X-Powered-By: Express
+                    ETag: W/"9c-y6jmv4A02B95np2iNQbvZFv/bTA"
+                    Date: Thu, 20 Feb 2025 11:01:43 GMT
+                    Connection: keep-alive
+                    Keep-Alive: timeout=5
+                    Content-Type: application/jso…
+Headers           : {[X-Powered-By, System.String[]], [ETag, System.String[]], [Date, System.String[]], [Connection, System.String[]]…}
+Images            : {}
+InputFields       : {}
+Links             : {}
+RawContentLength  : 156
+RelationLink      : {}
+
+PS C:\Users\kazum\tutorial\nest\controller>
+```
+
 ### 3-3. メモの取得
 
 以下のコマンドを実行してメモを取得します：
@@ -243,6 +279,31 @@ curl -X POST <http://localhost:3000/memos> \\
 ```bash
 curl <http://localhost:3000/memos/1>
 
+```
+
+```powershell
+PS C:\Users\kazum\tutorial\nest\controller> Invoke-WebRequest -Uri "http://localhost:3000/memos" `
+>> -Method GET
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : [{"id":1,"createdAt":"2025-02-20T11:01:17.280Z","updatedAt":"2025-02-20T11:01:17.280Z"},{"id":2,"title":"買い物リスト","content":"1. 牛乳\n2. パン\n3. 卵","cr
+                    eatedAt":"2025-02-20T11:01:43.315Z","updatedAt":"2025…
+RawContent        : HTTP/1.1 200 OK
+                    X-Powered-By: Express
+                    ETag: W/"f5-HuHyNjyY4+1FowUZR+doZbQ8yjY"
+                    Date: Thu, 20 Feb 2025 11:02:24 GMT
+                    Connection: keep-alive
+                    Keep-Alive: timeout=5
+                    Content-Type: application/json; ch…
+Headers           : {[X-Powered-By, System.String[]], [ETag, System.String[]], [Date, System.String[]], [Connection, System.String[]]…}
+Images            : {}
+InputFields       : {}
+Links             : {}
+RawContentLength  : 245
+RelationLink      : {}
+
+PS C:\Users\kazum\tutorial\nest\controller>
 ```
 
 ### 3-4. メモの更新
@@ -256,6 +317,54 @@ curl -X PUT <http://localhost:3000/memos/1> \\
 
 ```
 
+```powershell
+PS C:\Users\kazum\tutorial\nest\controller> Invoke-WebRequest -Uri "http://localhost:3000/memos/1" `
+>> -Method PUT `
+>> -Headers @{"Content-Type"="application/json"} `
+>> -Body '{"title": "更新された買い物リスト", "content": "1. 牛乳\n2. パン\n3. 卵\n4. バター"}'
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : {"id":1,"createdAt":"2025-02-20T11:01:17.280Z","updatedAt":"2025-02-20T11:03:05.023Z","title":"更新された買い物リスト","content":"1. 牛乳\n2. パン\n3. 卵\n4.
+                    バター"}
+RawContent        : HTTP/1.1 200 OK
+                    X-Powered-By: Express
+                    ETag: W/"b9-0VvnpvKfB9Ri2n2AZJpU++dxxKw"
+                    Date: Thu, 20 Feb 2025 11:03:05 GMT
+                    Connection: keep-alive
+                    Keep-Alive: timeout=5
+                    Content-Type: application/json; ch…
+Headers           : {[X-Powered-By, System.String[]], [ETag, System.String[]], [Date, System.String[]], [Connection, System.String[]]…}
+Images            : {}
+InputFields       : {}
+Links             : {}
+RawContentLength  : 185
+RelationLink      : {}
+
+PS C:\Users\kazum\tutorial\nest\controller> Invoke-WebRequest -Uri "http://localhost:3000/memos" `
+>> -Method GET
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : [{"id":1,"createdAt":"2025-02-20T11:01:17.280Z","updatedAt":"2025-02-20T11:03:05.023Z","title":"更新された買い物リスト","content":"1. 牛乳\n2. パン\n3. 卵\n4.
+                     バター"},{"id":2,"title":"買い物リスト","content":"1. 牛乳\n2. パン\n3…
+RawContent        : HTTP/1.1 200 OK
+                    X-Powered-By: Express
+                    ETag: W/"158-QRHCRwV8KpSFlj6+1YBb2j7fv4U"
+                    Date: Thu, 20 Feb 2025 11:03:23 GMT
+                    Connection: keep-alive
+                    Keep-Alive: timeout=5
+                    Content-Type: application/json; c…
+Headers           : {[X-Powered-By, System.String[]], [ETag, System.String[]], [Date, System.String[]], [Connection, System.String[]]…}
+Images            : {}
+InputFields       : {}
+Links             : {}
+RawContentLength  : 344
+RelationLink      : {}
+
+PS C:\Users\kazum\tutorial\nest\controller>
+```
+
 ### 3-5. メモの削除
 
 以下のコマンドを実行してメモを削除します：
@@ -263,6 +372,47 @@ curl -X PUT <http://localhost:3000/memos/1> \\
 ```bash
 curl -X DELETE <http://localhost:3000/memos/1>
 
+```
+
+```powershell
+PS C:\Users\kazum\tutorial\nest\controller> Invoke-WebRequest -Uri "http://localhost:3000/memos/1" `
+>> -Method DELETE
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : {}
+RawContent        : HTTP/1.1 200 OK
+                    X-Powered-By: Express
+                    Date: Thu, 20 Feb 2025 11:04:00 GMT
+                    Connection: keep-alive
+                    Keep-Alive: timeout=5
+                    Content-Length: 0
+
+Headers           : {[X-Powered-By, System.String[]], [Date, System.String[]], [Connection, System.String[]], [Keep-Alive, System.String[]]…}
+RawContentLength  : 0
+RelationLink      : {}
+
+PS C:\Users\kazum\tutorial\nest\controller> Invoke-WebRequest -Uri "http://localhost:3000/memos" `
+>> -Method GET
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : [{"id":2,"title":"買い物リスト","content":"1. 牛乳\n2. パン\n3. 卵","createdAt":"2025-02-20T11:01:43.315Z","updatedAt":"2025-02-20T11:01:43.315Z"}]
+RawContent        : HTTP/1.1 200 OK
+                    X-Powered-By: Express
+                    ETag: W/"9e-aVDLWmRM5PkaYmxufsv59EQZpKM"
+                    Date: Thu, 20 Feb 2025 11:04:04 GMT
+                    Connection: keep-alive
+                    Keep-Alive: timeout=5
+                    Content-Type: application/json; ch…
+Headers           : {[X-Powered-By, System.String[]], [ETag, System.String[]], [Date, System.String[]], [Connection, System.String[]]…}
+Images            : {}
+InputFields       : {}
+Links             : {}
+RawContentLength  : 158
+RelationLink      : {}
+
+PS C:\Users\kazum\tutorial\nest\controller>
 ```
 
 ## トラブルシューティング
